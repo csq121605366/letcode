@@ -36,6 +36,7 @@ int main()
 //    return 0;
 // }
 
+//hash实现方法
 struct node
 {
    int val;           //值

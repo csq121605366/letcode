@@ -1,0 +1,14 @@
+{
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "files.associations": {
+        "*.wxml": "html",
+        "*.wxss": "css",
+        "*.php": "php",
+        "*.vue": "vue",
+        "*.json": "json",
+        "*.wpy": "vue",
+        "iostream": "cpp",
+        "stdio.h": "c",
+        "string.h": "c"
+    }
+}
