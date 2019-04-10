@@ -23,7 +23,7 @@ typedef struct ListNode
     struct ListNode *next;
 } Node, *LinkList;
 
-LinkList addTwoNumbers(LinkList l1, LinkList l2)
+struct ListNode *addTwoNumbers(LinkList l1, LinkList l2)
 {
     //head用于返回
     LinkList head = (LinkList)malloc(sizeof(Node));
@@ -77,25 +77,50 @@ LinkList addTwoNumbers(LinkList l1, LinkList l2)
     return head;
 }
 
-void addTwoNumbers2(LinkList l1, LinkList l2, int num)
+int Getlength(struct ListNode *head)
 {
-    //head用于返回
-    LinkList head = (LinkList)malloc(sizeof(Node));
-    LinkList tail = head;
-    int sum = 0, sum1 = 0, sum2 = 0, per = pow(10, num - 1);
+    int i = 0;
+    struct ListNode *p;
+    if (head->next == NULL)
+        return 0;
+    else
+    {
+        p = head->next;
+        while (p)
+        {
+            i++;
+            p = p->next;
+        }
+        return i + 1;
+    }
+}
+
+struct ListNode *addTwoNumbers2(struct ListNode *l1, struct ListNode *l2)
+{
+    struct ListNode *head = (struct ListNode *)malloc(sizeof(struct ListNode));
+    struct ListNode *tail = head;
+    int sum = 0, sum1 = 0, sum2 = 0, per = pow(10, Getlength(l1) - 1);
+
     //sum用来判断是否需要进位,如果需要进位sum自减10,count值1用于和下一位相加
-    for (; l1; l1 = l1->next, l2 = l2->next, per /= 10)
+    for (; l1 && l2; l1 = l1->next, l2 = l2->next, per /= 10)
     {
         sum1 += l1->data * per;
         sum2 += l2->data * per;
     }
     sum = sum1 + sum2;
-    for (; num; num--)
+    while (sum > 0)
     {
-        tail->next = (LinkList)malloc(sizeof(Node));
+        tail->next = (struct ListNode *)malloc(sizeof(struct ListNode));
         tail = tail->next;
-        tail->data = sum % ();
+        tail->data = sum % 10; // 取出num的最低位
+        sum = sum / 10;        // 将num缩小10倍，将次低位变为最低位
     }
+    //返回链表的尾节点
+    tail->next = NULL;
+    tail = head;
+    head = head->next;
+    free(tail);
+    return head;
 }
 // 不带头结点的未插入法创建链表。
 // 创建这样的链表，首先指向头结点的指针不能移动，所以需要创建一个一直指向尾结点的指针rear。
@@ -133,7 +158,7 @@ int main()
     LinkList l2 = createLinklist(l2array, sizeof(l2array) / sizeof(l2array[0]));
 
     LinkList l3 = addTwoNumbers(l1, l2);
-    addTwoNumbers2(l1, l2, 3);
+    addTwoNumbers2(l1, l2);
     printf("%d\n", l3->data);
 
     return 0;
