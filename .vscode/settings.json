@@ -10,6 +10,10 @@
         "iostream": "cpp",
         "stdio.h": "c",
         "string.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "queue.C": "cpp",
+        "myqueue.h": "c",
+        "queue.h": "c",
+        "malloc.h": "c"
     }
 }
